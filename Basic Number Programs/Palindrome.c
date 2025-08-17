@@ -1,3 +1,5 @@
+// Program to perform Palindrome number check in C [Day: 17]
+
 #include <stdio.h>
 #include <string.h>
 
@@ -30,3 +32,4 @@ int main() {
 
     return 0;
 }
+
