@@ -1,4 +1,4 @@
-// Program to reverse an array and print in C [Day: 21]
+// Program to find the max element and print in C [Day: 21]
 //time complexity: O(n)
 
 #include<stdio.h>
@@ -19,4 +19,5 @@ int main(){
     printf("Array entered by you is:\n");
     for(int i=0;i<n;i++) printf("%d ",arr[i]);
     printf("\nMaximum element in the array: %d",max);
+
 }
