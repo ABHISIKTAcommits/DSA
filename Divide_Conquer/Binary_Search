@@ -1,0 +1,46 @@
+// Binary Search using DIVIDE & CONQUER APPROACH
+
+#include <stdio.h>
+
+int binarySearch(int arr[], int low, int high, int item)
+{
+    if (low > high)
+    {
+        return -1;
+    }
+    int mid = (low + high) / 2;
+    if (arr[mid] == item)
+    {
+        return mid;
+    }
+    if (item < arr[mid])
+    {
+        return binarySearch(arr, low, mid - 1, item);
+    }
+    return binarySearch(arr, mid + 1, high, item);
+}
+
+int main()
+{
+    int n, item, result;
+    printf("Enter number of elements: ");
+    scanf("%d", &n);
+    int arr[n];
+    printf("Enter %d sorted elements:\n", n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &arr[i]);
+    }
+    printf("Enter element to search: ");
+    scanf("%d", &item);
+    result = binarySearch(arr, 0, n - 1, item);
+    if (result != -1)
+    {
+        printf("Element found at index %d\n", result);
+    }
+    else
+    {
+        printf("Element not found\n");
+    }
+    return 0;
+}
