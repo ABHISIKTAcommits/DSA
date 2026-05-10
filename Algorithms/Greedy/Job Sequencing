@@ -1,0 +1,53 @@
+// Job sequencing by Greedy approach 
+
+#include <stdio.h>
+int main() {
+    int n, i, j;
+    printf("Enter number of jobs: ");
+    scanf("%d", &n);
+    char job[20];
+    int profit[20], deadline[20];
+    for(i = 0; i < n; i++) {
+        printf("Enter job id, profit and deadline: ");
+        scanf(" %c %d %d", &job[i], &profit[i], &deadline[i]);
+    }
+    for(i = 0; i < n - 1; i++) {
+        int max = i;
+        for(j = i + 1; j < n; j++) {
+            if(profit[j] > profit[max]) {
+                max = j;
+            }
+        }
+        int temp;
+        temp = profit[i];
+        profit[i] = profit[max];
+        profit[max] = temp;
+        temp = deadline[i];
+        deadline[i] = deadline[max];
+        deadline[max] = temp;
+        char ch = job[i];
+        job[i] = job[max];
+        job[max] = ch;
+    }
+    int slot[20] = {0};
+    char result[20];
+    int totalProfit = 0;
+    for(i = 0; i < n; i++) {
+        for(j = deadline[i] - 1; j >= 0; j--) {
+            if(slot[j] == 0) {
+                slot[j] = 1;
+                result[j] = job[i];
+                totalProfit += profit[i];
+                break;
+            }
+        }
+    }
+    printf("Selected Jobs: ");
+    for(i = 0; i < n; i++) {
+        if(slot[i] == 1) {
+            printf("%c ", result[i]);
+        }
+    }
+    printf("\nTotal Profit = %d", totalProfit);
+    return 0;
+}
