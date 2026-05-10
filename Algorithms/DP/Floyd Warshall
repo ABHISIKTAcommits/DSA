@@ -1,0 +1,74 @@
+//Floyd warshall algorithm 
+
+#include <stdio.h>
+#define MAX 11
+#define INF 999
+int d[MAX][MAX];
+void floyd(int n) 
+{
+    int i, j, k;
+    for (k = 1; k <= n; k++) 
+    {
+        for (i = 1; i <= n; i++) 
+        {
+            for (j = 1; j <= n; j++) 
+            {
+                if (d[i][k] != INF && d[k][j] != INF) 
+                {
+                    if (d[i][k] + d[k][j] < d[i][j]) 
+                    {
+                        d[i][j] = d[i][k] + d[k][j];
+                    }
+                }
+            }
+        }
+    }
+}
+
+int main() 
+{
+    int i, j, n, e, u, v, w;
+    printf("Enter number of vertices (max 10): ");
+    if (scanf("%d", &n) != 1 || n >= MAX) 
+    {
+        printf("Invalid number of vertices.\n");
+        return 1;
+    }
+    for (i = 1; i <= n; i++) 
+    {
+        for (j = 1; j <= n; j++) 
+        {
+            if (i == j)
+                d[i][j] = 0;
+            else
+                d[i][j] = INF;
+        }
+    }
+    printf("Enter number of edges: ");
+    scanf("%d", &e);
+    printf("Enter edges (u v w):\n");
+    for (i = 1; i <= e; i++) 
+    {
+        if (scanf("%d %d %d", &u, &v, &w) == 3) 
+        {
+            if (u < MAX && v < MAX) 
+            {
+                d[u][v] = w;
+            }
+        }
+    }
+    floyd(n);
+    printf("\nShortest Distance Matrix:\n");
+    for (i = 1; i <= n; i++) 
+    {
+        for (j = 1; j <= n; j++) 
+        {
+            if (d[i][j] == INF)
+                printf("%5s", "INF");
+            else
+                printf("%5d", d[i][j]);
+        }
+        printf("\n");
+    }
+    return 0;
+}
